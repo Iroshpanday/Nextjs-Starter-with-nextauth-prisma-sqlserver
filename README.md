@@ -1,59 +1,132 @@
-<p align="center">
-  <a>
-    <img src="./public/logo.png" height="96">
-    <h3 align="center">Next.js Prisma PostgreSQL Auth Starter with Shadcn</h3>
-  </a>
-</p>
+🚀 Next.js 14 Prisma Shadcn Starter (SQL Server)
 
-<p align="center">
-This is a <a href="https://nextjs.org/">Next.js</a> starter kit that uses <a href="https://next-auth.js.org/">Next-Auth</a> for simple email + password login<br/>
-<a href="https://www.prisma.io/">Prisma</a> as the ORM, and Postgres database to persist the data. This application uses <a href="https://ui.shadcn.com/">Shadcn</a> for UI components, and <a href="https://tailwindcss.com/">Tailwind CSS</a> for styling. It has integrated theming support, with support for multiple themes with a custom plugin.
+A starter template for building modern apps with:
 
-<br/>
+⚡ Next.js 14 (App Router)
 
-## Configure the Database
+🗄️ Prisma ORM with SQL Server
 
-- create a `.env` file in the root of the project
+🔐 NextAuth.js for authentication
 
-```
-# Create a Postgres database
-POSTGRES_PRISMA_URL=
-POSTGRES_URL_NON_POOLING=
+🎨 Shadcn UI + TailwindCSS with theming
 
-# Generate one with this command: openssl rand -base64 32
-NEXTAUTH_SECRET=
-```
+✅ Zod for form validation
 
-First, run the development server:
+🔔 Notistack for global notifications
 
-```bash
+📊 TanStack Table with search & pagination
+
+📦 Getting Started
+1. Clone the repo
+git clone https://github.com/<your-username>/<your-repo>.git
+cd <your-repo>
+
+2. Install dependencies
+npm install
+
+3. Setup environment variables
+
+Create a .env file in the root:
+
+# Database connection (SQL Server via Prisma)
+DATABASE_URL="sqlserver://localhost:1433;database=mydb;user=sa;password=YourPassword;trustServerCertificate=true;"
+
+# NextAuth secret
+NEXTAUTH_SECRET="your-random-secret"
+
+# NextAuth URL
+NEXTAUTH_URL="http://localhost:3000"
+
+🗄️ Database Setup
+
+Run Prisma migrations:
+
+npx prisma migrate dev
+
+
+Open Prisma Studio (GUI for DB):
+
+npx prisma studio
+
+🎨 Theming
+
+Themes are configured in lib/shadcn-plugin.ts.
+Example custom colors:
+
+":root": {
+  "--brown-dark-1": "355 45% 31%",
+  "--magenta-dark-1": "200 55% 37%",
+  "--purple-dark-1": "261 51% 51%",
+  "--dark-green-1": "145 58% 55%",
+},
+
+theme: {
+  "dark-1": "hsl(var(--brown-dark-1))",
+  "dark-2": "hsl(var(--magenta-dark-1))",
+  "dark-3": "hsl(var(--purple-dark-1))",
+  "dark-4": "hsl(var(--dark-green-1))",
+}
+
+
+Switch themes globally using <ThemeProvider> in app/layout.tsx.
+
+🔔 Notifications
+
+Wrapped with a NotificationProvider (using notistack).
+Trigger notifications anywhere:
+
+import { useSnackbar } from "notistack";
+
+const MyComponent = () => {
+  const { enqueueSnackbar } = useSnackbar();
+  return (
+    <button onClick={() => enqueueSnackbar("Action successful!", { variant: "success" })}>
+      Show Notification
+    </button>
+  );
+};
+
+📊 Tables with Search & Pagination
+
+This starter includes TanStack Table v8 with:
+
+Server/client pagination
+
+Search input
+
+Sorting
+
+▶️ Run the App
 npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-## Theming with Shadcn
-
-This starter kit uses Shadcn for UI components, and Tailwind CSS for styling. It has integrated theming support, with support for multiple themes with a custom plugin.
-
-### Creating a Theme
-
-To create a theme, add to `lib/shadcn-plugin.ts`:
-
-```ts
-
- - add colors to `:root` object
-  `
-     "--brown-dark-1": "355 45% 31%",
-        "--magenta-dark-1": "200 55% 37%",
-        "--purple-dark-1": "261 51% 51%",
-        "--dark-green-1": "145 58% 55%",
 
 
- - configure the `theme` object
+App will be available at:
+👉 http://localhost:3000
 
-    "dark-1": "hsl(var(--brown-dark-1))",
-    "dark-2": "hsl(var(--magenta-dark-1))",
-    "dark-3": "hsl(var(--purple-dark-1))",
-    "dark-4": "hsl(var(--dark-green-1))",
-```
+🛠 Tech Stack
+
+Next.js 14
+
+Prisma
+
+SQL Server
+
+NextAuth.js
+
+Shadcn UI
+
+Zod
+
+TanStack Table
+
+Notistack
+
+📌 Notes
+
+Default DB: SQL Server (change DATABASE_URL for Postgres/MySQL if needed).
+
+Includes ThemeProvider and NotificationProvider for global support.
+
+Use this as a starter kit for your SaaS, dashboards, or internal tools.
+
+🔥 Happy coding!
